@@ -1,17 +1,3 @@
-HELP.md
-build/
-!**/src/main/**
-!**/src/test/**
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### Gradle ###
-.gradle
-
-### Logs ###
-*.log
-/.idea/
+# Default ignored files
+/shelf/
+/workspace.xml
