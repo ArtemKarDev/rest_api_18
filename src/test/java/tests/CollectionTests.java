@@ -8,6 +8,7 @@ import models.IsbnModel;
 import extensions.WithLogin;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
 
@@ -30,6 +31,7 @@ public class CollectionTests extends TestBase {
     @Test
     @DisplayName("Delete one book from profile check")
     @WithLogin
+    @Tag("collectionBooks")
     void deleteBookFromCollection() {
 
         booksApi.deleteAllBooks(authResponse);

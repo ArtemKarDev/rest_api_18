@@ -4,7 +4,7 @@ import models.AuthRequestModel;
 public class TestData {
 
     private static final String userName = "ArtemKa";
-    private static final String password = "747743Qa-";
+    private static final String password = "747743Qa%";
     public static AuthRequestModel credentials = new AuthRequestModel(userName, password);
 
     public static final String isbnSpeakJS = "9781449365035";

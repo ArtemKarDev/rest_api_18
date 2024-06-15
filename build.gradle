@@ -62,8 +62,30 @@ tasks.withType(Test) {
     }
 }
 
-task bookCollection(type: Test) {
-    useJUnitPlatform {
-        includeTags("bookCollection")
+
+// Задача для запуска тестов с тегом "regress"
+tasks.register('regress', Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
     }
+    useJUnitPlatform {
+        includeTags("regress")
+    }
+    systemProperties(System.getProperties())
+}
+
+tasks.register('smoke', Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+        excludeTags("regress")
+    }
+    systemProperties(System.getProperties())
+}
+
+tasks.register('collectionBooks', Test) {
+    useJUnitPlatform {
+        includeTags("collectionBooks")
+    }
+    systemProperties(System.getProperties())
 }

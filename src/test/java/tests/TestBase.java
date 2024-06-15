@@ -23,7 +23,7 @@ public class TestBase {
     static void setUpConfig() {
 
         String browser = System.getProperty("browser", "chrome");
-        String version = System.getProperty("version", "101");
+        String version = System.getProperty("version", "122.0");
         String windowSize = System.getProperty("windowSize", "1920x1080");
         String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
         Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
