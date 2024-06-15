@@ -26,7 +26,14 @@ public class ProfilePage {
         return this;
     }
 
-    @Step("Check that specific book is not displayed n profile")
+    @Step("Check that specific book is displayed in profile")
+    public ProfilePage checkBooksListContainBook(String bookName) {
+
+        booksTable.shouldHave(text(bookName));
+
+        return this;
+    }
+    @Step("Check that specific book is not displayed in profile")
     public ProfilePage checkBooksListDoesNotContainBook(String bookName) {
 
         booksTable.shouldNotHave(text(bookName));

@@ -23,13 +23,33 @@ public class CollectionTests extends TestBase {
     AuthResponseModel authResponse = getAuthResponse(credentials);
     BooksApi booksApi = new BooksApi();
     ProfilePage profilePage = new ProfilePage();
-    IsbnModel isbn = new IsbnModel(isbnGit);
+    IsbnModel isbnGitBook = new IsbnModel(isbnGit);
+    IsbnModel isbnSpeakJSBook = new IsbnModel(isbnSpeakJS);
     AddBookRequestModel addBook = new AddBookRequestModel();
     DeleteOneBookModel deleteOneBookData = new DeleteOneBookModel();
 
+    @Test
+    @DisplayName("Add one book in profile")
+    @WithLogin
+    @Tag("collectionBooks")
+    void addBookInCollection() {
+
+        //Collection cleaning
+        booksApi.deleteAllBooks(authResponse);
+
+        List<IsbnModel> isbnList = new ArrayList<>();
+        isbnList.add(isbnSpeakJSBook);
+        addBook.setCollectionOfIsbns(isbnList);
+        addBook.setUserId(authResponse.getUserId());
+        booksApi.addBook(authResponse, addBook);
+
+        profilePage.openPage()
+                .checkUser(authResponse.getUsername())
+                .checkBooksListContainBook(SpeakJSBookName);
+    }
 
     @Test
-    @DisplayName("Delete one book from profile check")
+    @DisplayName("Delete one book from profile")
     @WithLogin
     @Tag("collectionBooks")
     void deleteBookFromCollection() {
@@ -37,7 +57,7 @@ public class CollectionTests extends TestBase {
         booksApi.deleteAllBooks(authResponse);
 
         List<IsbnModel> isbnList = new ArrayList<>();
-        isbnList.add(isbn);
+        isbnList.add(isbnGitBook);
         addBook.setCollectionOfIsbns(isbnList);
         addBook.setUserId(authResponse.getUserId());
         booksApi.addBook(authResponse, addBook);
