@@ -23,7 +23,7 @@ public class LoginExtension implements BeforeEachCallback {
 
         AuthResponseModel authResponse = getAuthResponse(credentials);
 
-        open("/favicon.ico");
+        open("/images/Toolsqa.jpg");
 
         getWebDriver().manage().addCookie(new Cookie(userIdCookieKey, authResponse.getUserId()));
         getWebDriver().manage().addCookie(new Cookie(expiresCookieKey, authResponse.getExpires()));
