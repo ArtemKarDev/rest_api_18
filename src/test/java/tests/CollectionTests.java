@@ -34,7 +34,6 @@ public class CollectionTests extends TestBase {
     @Tag("collectionBooks")
     void addBookInCollection() {
 
-        //Collection cleaning
         booksApi.deleteAllBooks(authResponse);
 
         List<IsbnModel> isbnList = new ArrayList<>();
@@ -62,12 +61,14 @@ public class CollectionTests extends TestBase {
         addBook.setUserId(authResponse.getUserId());
         booksApi.addBook(authResponse, addBook);
 
-        deleteOneBookData.setUserId(authResponse.getUserId());
-        deleteOneBookData.setIsbn(isbnGit);
-        booksApi.deleteOneBook(authResponse, deleteOneBookData);
+//        deleteOneBookData.setUserId(authResponse.getUserId());
+//        deleteOneBookData.setIsbn(isbnGit);
+//        booksApi.deleteOneBook(authResponse, deleteOneBookData);
 
         profilePage.openPage()
                 .checkUser(authResponse.getUsername())
+                .checkBooksListContainBook(gitBookName)
+                .deleteSpecificBook(gitBookName)
                 .checkBooksListDoesNotContainBook(gitBookName);
     }
 

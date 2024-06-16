@@ -10,7 +10,11 @@ import static com.codeborne.selenide.Selenide.open;
 public class ProfilePage {
 
     private SelenideElement booksTable = $(".ReactTable"),
-            userNameField = $("#userName-value");
+            userNameField = $("#userName-value"),
+
+            bookCell = $(".rt-tr"),
+            bookDeleteButton = $("#delete-record-undefined");
+
 
     @Step("Open profile page")
     public ProfilePage openPage() {
@@ -18,6 +22,7 @@ public class ProfilePage {
 
         return this;
     }
+
 
     @Step("Check username on profile page")
     public ProfilePage checkUser(String userName) {
@@ -33,6 +38,16 @@ public class ProfilePage {
 
         return this;
     }
+
+    @Step("Delete specific book")
+    public ProfilePage deleteSpecificBook(String bookName) {
+
+        bookCell.shouldHave(text(bookName));
+        bookDeleteButton.click();
+
+        return this;
+    }
+
     @Step("Check that specific book is not displayed in profile")
     public ProfilePage checkBooksListDoesNotContainBook(String bookName) {
 
