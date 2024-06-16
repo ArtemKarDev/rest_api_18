@@ -44,6 +44,7 @@ public class ProfilePage {
         //$(".rt-tr.-odd").shouldHave(text(bookName));
         $(".rt-tr a[href=\"/profile?book="+isbnGit+"\"]").shouldHave(text(bookName));
         bookDeleteButton.click();
+        $("#closeSmallModal-ok").click();
 
         return this;
     }
