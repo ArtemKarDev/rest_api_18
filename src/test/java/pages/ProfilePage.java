@@ -12,7 +12,6 @@ public class ProfilePage {
     private SelenideElement booksTable = $(".ReactTable"),
             userNameField = $("#userName-value"),
 
-            bookCell = $(".rt-tr"),
             bookDeleteButton = $("#delete-record-undefined");
 
 
@@ -40,9 +39,10 @@ public class ProfilePage {
     }
 
     @Step("Delete specific book")
-    public ProfilePage deleteSpecificBook(String bookName) {
+    public ProfilePage deleteSpecificBook(String bookName, String isbnGit) {
 
-        bookCell.shouldHave(text(bookName));
+        //$(".rt-tr.-odd").shouldHave(text(bookName));
+        $(".rt-tr a[href=\"/profile?book="+isbnGit+"\"]").shouldHave(text(bookName));
         bookDeleteButton.click();
 
         return this;

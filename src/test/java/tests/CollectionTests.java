@@ -68,7 +68,7 @@ public class CollectionTests extends TestBase {
         profilePage.openPage()
                 .checkUser(authResponse.getUsername())
                 .checkBooksListContainBook(gitBookName)
-                .deleteSpecificBook(gitBookName)
+                .deleteSpecificBook(gitBookName,isbnGit)
                 .checkBooksListDoesNotContainBook(gitBookName);
     }
 
