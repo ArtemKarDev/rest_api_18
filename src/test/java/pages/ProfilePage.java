@@ -41,7 +41,6 @@ public class ProfilePage {
     @Step("Delete specific book")
     public ProfilePage deleteSpecificBook(String bookName, String isbnGit) {
 
-        //$(".rt-tr.-odd").shouldHave(text(bookName));
         $(".rt-tr a[href=\"/profile?book="+isbnGit+"\"]").shouldHave(text(bookName));
         bookDeleteButton.click();
         $("#closeSmallModal-ok").click();

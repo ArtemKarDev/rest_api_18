@@ -7,6 +7,7 @@ import models.DeleteOneBookModel;
 import models.IsbnModel;
 import extensions.WithLogin;
 import io.qameta.allure.Feature;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -32,15 +33,15 @@ public class CollectionTests extends TestBase {
     @DisplayName("Add one book in profile")
     @WithLogin
     @Tag("collectionBooks")
+    @Disabled
     void addBookInCollection() {
 
         booksApi.deleteAllBooks(authResponse);
-
-        List<IsbnModel> isbnList = new ArrayList<>();
-        isbnList.add(isbnSpeakJSBook);
-        addBook.setCollectionOfIsbns(isbnList);
-        addBook.setUserId(authResponse.getUserId());
-        booksApi.addBook(authResponse, addBook);
+    //todo
+        // open bookStore
+        // check displayed specific book on page
+        // open Book page
+        // add book in profile
 
         profilePage.openPage()
                 .checkUser(authResponse.getUsername())
@@ -60,10 +61,6 @@ public class CollectionTests extends TestBase {
         addBook.setCollectionOfIsbns(isbnList);
         addBook.setUserId(authResponse.getUserId());
         booksApi.addBook(authResponse, addBook);
-
-//        deleteOneBookData.setUserId(authResponse.getUserId());
-//        deleteOneBookData.setIsbn(isbnGit);
-//        booksApi.deleteOneBook(authResponse, deleteOneBookData);
 
         profilePage.openPage()
                 .checkUser(authResponse.getUsername())

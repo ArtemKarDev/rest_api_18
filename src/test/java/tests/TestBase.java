@@ -10,6 +10,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -18,7 +19,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    @Step("Open site in remote browser")
+
+    @Step("Open site in browser")
     @BeforeAll
     static void setUpConfig() {
 
