@@ -13,25 +13,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.function.Supplier;
 import java.util.Map;
 
-//public class WebDriverProvider implements Supplier<WebDriver> {
-//
-//    private final WebDriverConfig config;
-//
-//    public WebDriverProvider() {
-//        this.config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-//    }
-//
-//    @Override
-//    public WebDriver get() {
-//        WebDriver driver = createDriver();
-//        driver.get(config.getBaseUrl());
-//        driver.get(config.getBrowserSize());
-//        driver.get(config.getBrowserVersion());
-//        driver.get(config.getRemoteUrl());
-//        driver.get(config.getPageLoadStrategy());
-//
-//        return driver;
-//    }
 public class WebDriverProvider {
     public static void config() {
 
@@ -43,9 +24,14 @@ public class WebDriverProvider {
         Configuration.browserVersion = config.getBrowserVersion();
         Configuration.pageLoadStrategy = config.getPageLoadStrategy();
         Configuration.holdBrowserOpen =  config.getHoldBrowserOpen();
+        Configuration.remote = config.getRemoteUrl();
 
         if (System.getProperty("env") == "remote") {
-            Configuration.remote = "https://user1:1234@" + config.getRemoteUrl() + "/wd/hub";
+            Configuration.remote = "https://"
+                    + config.remoteUsername() + ":"
+                    + config.remotePassword() + "@"
+                    + Configuration.remote
+                    + "/wd/hub";
         }
 
 
@@ -57,23 +43,6 @@ public class WebDriverProvider {
 
         Configuration.browserCapabilities = capabilities;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-
-    //    public WebDriver createDriver() {
-    //        switch (config.getBrowser()) {
-    //            case "chrome": {
-    //                WebDriverManager.chromedriver().setup();
-    //                return new ChromeDriver();
-    //            }
-    //            case "fireox": {
-    //                WebDriverManager.firefoxdriver().setup();
-    //                return new FirefoxDriver();
-    //            }
-    //            default: {
-    //                throw new RuntimeException("No such driver");
-    //            }
-    //        }
-    //    }
 
     }
 }

@@ -39,8 +39,6 @@ public class TestBase {
 
         RestAssured.baseURI = "https://demoqa.com";
 
-
-
         //пожалуйста, позвольте оставить эту строчку
         //Configuration.holdBrowserOpen = true;
 
