@@ -13,22 +13,17 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.webdriver;
 
-public class TestBase extends WebDriverProvider{
+public class TestBase {
 
-    private WebDriver driver = new WebDriverProvider().get();
+    //private WebDriver driver = new WebDriverProvider().get();
 
     @Step("Open site in browser")
     @BeforeAll
     static void setUpConfig() {
 
+        // убрал конфигурацию в webDriverProvider
 //        String browser = System.getProperty("browser", "chrome");
 //        String version = System.getProperty("webDriverVersion", "122.0");
 //        String windowSize = System.getProperty("browserWindowSize", "1920x1080");
@@ -39,20 +34,24 @@ public class TestBase extends WebDriverProvider{
 //        Configuration.browserSize = windowSize;
 //        Configuration.baseUrl = "https://demoqa.com";
 
+        WebDriverProvider webDriverProvider = new WebDriverProvider();
+        webDriverProvider.config();
+
         RestAssured.baseURI = "https://demoqa.com";
-        webdriver().driver().config() = driver;
+
+
 
         //пожалуйста, позвольте оставить эту строчку
         //Configuration.holdBrowserOpen = true;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-
-        Configuration.browserCapabilities = capabilities;
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("selenoid:options", Map.of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+//
+//        Configuration.browserCapabilities = capabilities;
+//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
 

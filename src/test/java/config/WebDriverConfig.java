@@ -2,8 +2,8 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-import java.net.URL;
 
+@Config.Sources({"classpath:config/${env}.properties"})
 public interface WebDriverConfig extends Config {
 
     @Key("baseUrl")
@@ -12,11 +12,11 @@ public interface WebDriverConfig extends Config {
 
     @Key("browser")
     @DefaultValue("CHROME")
-    Browser getBrowser();
+    String getBrowser();
 
     @Key("remoteUrl")
-    @DefaultValue("http://localhost:4444")
-    String getRemoteURL();
+    //@DefaultValue("http://localhost:4444")
+    String getRemoteUrl();
 
     @Key("browserSize")
     @DefaultValue("1920x1080")
@@ -30,5 +30,8 @@ public interface WebDriverConfig extends Config {
     @DefaultValue("eager")
     String getPageLoadStrategy();
 
+    @Key("holdBrowserOpen")
+    @DefaultValue("false")
+    Boolean getHoldBrowserOpen();
 
 }
