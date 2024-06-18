@@ -14,8 +14,21 @@ public interface WebDriverConfig extends Config {
     @DefaultValue("CHROME")
     Browser getBrowser();
 
-    @Key("wdHost")
+    @Key("remoteUrl")
     @DefaultValue("http://localhost:4444")
-    URL getRemoteURL();
+    String getRemoteURL();
+
+    @Key("browserSize")
+    @DefaultValue("1920x1080")
+    String getBrowserSize();
+
+    @Key("browserVersion")
+    @DefaultValue("122.0")
+    String getBrowserVersion();
+
+    @Key("pageLoadStrategy")
+    @DefaultValue("eager")
+    String getPageLoadStrategy();
+
 
 }
