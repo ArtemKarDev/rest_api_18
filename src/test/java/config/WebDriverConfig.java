@@ -2,7 +2,12 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources({"classpath:config/${env}.properties"})
+@Config.LoadPolicy(Config.LoadType.FIRST)
+@Config.Sources({
+        "classpath:config/${env}.properties",
+        "classpath:config/local.properties"
+})
+
 public interface WebDriverConfig extends Config {
 
     @Key("baseUrl")
@@ -27,12 +32,6 @@ public interface WebDriverConfig extends Config {
     @Key("remoteUrl")
     String getRemoteUrl();
 
-    @Key("remote.user")
-    @DefaultValue("user1")
-    String remoteUsername();
 
-    @Key("remote.password")
-    @DefaultValue("1234")
-    String remotePassword();
 
 }

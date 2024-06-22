@@ -8,15 +8,13 @@ import org.aeonbits.owner.Config;
         "classpath:config/tests.properties"
 })
 
-public interface TestsConfig extends Config {
-    String webUrl();
+public interface AuthConfig extends Config {
 
-    String apiUrl();
+    @Key("userLogin")
+    String getUserLogin();
 
-    String userLogin();
+    @Key("userPassword")
+    String getUserPassword();
 
-    String userPassword();
-
-    String userToken();
 
 }

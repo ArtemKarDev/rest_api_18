@@ -12,6 +12,7 @@ public class WebDriverProvider {
     public static void config() {
 
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
+        SelenoidAuthConfig selenoidAuthConfig = ConfigFactory.create(SelenoidAuthConfig.class, System.getProperties());
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browser = config.getBrowser();
@@ -19,12 +20,11 @@ public class WebDriverProvider {
         Configuration.browserVersion = config.getBrowserVersion();
         Configuration.pageLoadStrategy = config.getPageLoadStrategy();
         Configuration.holdBrowserOpen =  config.getHoldBrowserOpen();
-        Configuration.remote = config.getRemoteUrl();
 
-        if (System.getProperty("env") == "remote") {
+        if ("remote".equals(System.getProperty("env"))) {
             Configuration.remote = "https://"
-                    + config.remoteUsername() + ":"
-                    + config.remotePassword() + "@"
+                    + selenoidAuthConfig.getRemoteUsername() + ":"
+                    + selenoidAuthConfig.getRemotePassword() + "@"
                     + Configuration.remote
                     + "/wd/hub";
         }
