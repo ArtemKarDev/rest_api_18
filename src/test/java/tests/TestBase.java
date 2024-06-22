@@ -27,7 +27,7 @@ public class TestBase {
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
         //RestAssured.baseURI = "https://demoqa.com";
-        RestAssured.baseURI = config.getRemoteUrl();
+        RestAssured.baseURI = config.getBaseUrl());
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
