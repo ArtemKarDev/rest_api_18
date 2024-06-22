@@ -3,11 +3,13 @@ package tests;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 
+import config.WebDriverConfig;
 import config.WebDriverProvider;
 import helpers.Attach;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -22,7 +24,10 @@ public class TestBase {
         WebDriverProvider webDriverProvider = new WebDriverProvider();
         webDriverProvider.config();
 
-        RestAssured.baseURI = "https://demoqa.com";
+        WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
+
+        //RestAssured.baseURI = "https://demoqa.com";
+        RestAssured.baseURI = config.getRemoteUrl();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
@@ -35,7 +40,6 @@ public class TestBase {
         if (!WebDriverRunner.isFirefox()) {
             Attach.browserConsoleLogs();
         }
-        Attach.browserConsoleLogs();
 
         Attach.addVideo();
         closeWebDriver();
