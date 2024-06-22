@@ -25,7 +25,7 @@ public class WebDriverProvider {
             Configuration.remote = "https://"
                     + selenoidAuthConfig.getRemoteUsername() + ":"
                     + selenoidAuthConfig.getRemotePassword() + "@"
-                    + Configuration.remote
+                    + config.getRemoteUrl()
                     + "/wd/hub";
         }
 
