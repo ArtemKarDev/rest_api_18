@@ -33,7 +33,6 @@ public class CollectionTests extends TestBase {
     @DisplayName("Delete all books from profile with button Delete all")
     @WithLogin
     @Tag("collectionBooks")
-    //@Disabled
     void addBookInCollection() {
 
         booksApi.deleteAllBooks(authResponse);
