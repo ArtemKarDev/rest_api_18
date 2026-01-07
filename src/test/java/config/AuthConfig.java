@@ -16,5 +16,4 @@ public interface AuthConfig extends Config {
     @Key("userPassword")
     String getUserPassword();
 
-
 }

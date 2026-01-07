@@ -26,26 +26,30 @@ public class CollectionTests extends TestBase {
     ProfilePage profilePage = new ProfilePage();
     IsbnModel isbnGitBook = new IsbnModel(isbnGit);
     IsbnModel isbnSpeakJSBook = new IsbnModel(isbnSpeakJS);
-    AddBookRequestModel addBook = new AddBookRequestModel();
-    DeleteOneBookModel deleteOneBookData = new DeleteOneBookModel();
+    AddBookRequestModel addBookRequestData = new AddBookRequestModel();
+    DeleteOneBookModel deleteOneBookRequestData = new DeleteOneBookModel();
 
     @Test
-    @DisplayName("Add one book in profile")
+    @DisplayName("Delete all books from profile with button Delete all")
     @WithLogin
     @Tag("collectionBooks")
-    @Disabled
+    //@Disabled
     void addBookInCollection() {
 
         booksApi.deleteAllBooks(authResponse);
-    //todo
-        // open bookStore
-        // check displayed specific book on page
-        // open Book page
-        // add book in profile
 
-        profilePage.openPage()
+        List<IsbnModel> isbnList = new ArrayList<>();
+        isbnList.add(isbnSpeakJSBook);
+        isbnList.add(isbnGitBook);
+        addBookRequestData.setCollectionOfIsbns(isbnList);
+        addBookRequestData.setUserId(authResponse.getUserId());
+        booksApi.addBook(authResponse, addBookRequestData);
+
+        profilePage.openProfilePage()
                 .checkUser(authResponse.getUsername())
-                .checkBooksListContainBook(SpeakJSBookName);
+                .checkBooksListContainBook(SpeakJSBookName)
+                .deleteAllBooks()
+                .checkBooksListDoesNotContainBook(gitBookName);
     }
 
     @Test
@@ -58,11 +62,11 @@ public class CollectionTests extends TestBase {
 
         List<IsbnModel> isbnList = new ArrayList<>();
         isbnList.add(isbnGitBook);
-        addBook.setCollectionOfIsbns(isbnList);
-        addBook.setUserId(authResponse.getUserId());
-        booksApi.addBook(authResponse, addBook);
+        addBookRequestData.setCollectionOfIsbns(isbnList);
+        addBookRequestData.setUserId(authResponse.getUserId());
+        booksApi.addBook(authResponse, addBookRequestData);
 
-        profilePage.openPage()
+        profilePage.openProfilePage()
                 .checkUser(authResponse.getUsername())
                 .checkBooksListContainBook(gitBookName)
                 .deleteSpecificBook(gitBookName,isbnGit)

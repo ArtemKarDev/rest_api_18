@@ -6,7 +6,7 @@ import org.aeonbits.owner.ConfigFactory;
 public class TestData {
 
     public static AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
-    public static AuthRequestModel credentials = new AuthRequestModel(authConfig.getUserLogin(), authConfig.getUserPassword());  // authConfig.userLogin(), AuthConfig.userPassword());
+    public static AuthRequestModel credentials = new AuthRequestModel(authConfig.getUserLogin(), authConfig.getUserPassword());
     public static final String isbnSpeakJS = "9781449365035";
     public static final String SpeakJSBookName = "Speaking JavaScript";
 

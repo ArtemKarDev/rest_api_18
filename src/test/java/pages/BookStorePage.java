@@ -12,6 +12,13 @@ public class BookStorePage {
 
     private SelenideElement booksTable = $(".ReactTable");
 
+    @Step("Open bookStore page")
+    public BookStorePage openBookStorePage() {
+        open("/books");
+        return this;
+    }
+
+
     @Step("Check that specific book is displayed on page")
     public BookStorePage checkBooksListContainBook(String bookName) {
 
@@ -26,7 +33,15 @@ public class BookStorePage {
         $(".rt-tr a[href=\"/profile?book="+isbnGit+"\"]")
                 .shouldHave(text(bookName))
                 .click();
+        return this;
+    }
 
+    @Step("Delete specific book")
+    public BookStorePage deleteSpecificBook(String bookName, String isbnGit) {
+
+        $(".rt-tr a[href=\"/profile?book="+isbnGit+"\"]")
+                .shouldHave(text(bookName))
+                .click();
         return this;
     }
 
