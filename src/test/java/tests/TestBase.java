@@ -32,35 +32,11 @@ public class TestBase {
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
         RestAssured.baseURI = config.getBaseUrl();
 
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("version", "127.0");
-        Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = System.getProperty("remote");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
-        Configuration.headless = false;
-
+        System.out.println("-> Режим: " + (config.remote() ? "Удалённый" : "Локальный"));
+        System.out.println("-> Browser: " + Configuration.browser);
+        System.out.println("-> Base URL: " + Configuration.baseUrl);
 
     }
-
-//    @Step("Attach video, screenshot and browser logs. Close browser. ")
-//    @AfterEach
-//    void addAttachments(){
-//        Attach.screenshotAs("Last screenshot");
-//        Attach.pageSource();
-//        if (!WebDriverRunner.isFirefox()) {
-//            Attach.browserConsoleLogs();
-//        }
-//
-//        Attach.addVideo();
-//        closeWebDriver();
-//    }
 
     @BeforeEach
     void beforeEach(){
@@ -74,7 +50,6 @@ public class TestBase {
 
     @AfterEach
     void tearDown() {
-        // Очистка cookies после каждого теста
         clearBrowserCookies();
         clearBrowserLocalStorage();
     }

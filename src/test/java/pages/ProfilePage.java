@@ -47,8 +47,7 @@ public class ProfilePage {
 
     @Step("Delete all books")
     public ProfilePage deleteAllBooks() {
-        allBooksDeleteButton.scrollTo()
-                .click();
+        allBooksDeleteButton.scrollTo().click();
         $("#closeSmallModal-ok").click();
         return this;
     }

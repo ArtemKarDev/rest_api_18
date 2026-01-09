@@ -2,27 +2,33 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.LoadPolicy(Config.LoadType.FIRST)
+@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "classpath:config/${env}.properties",
-        "classpath:config/local.properties"
+        "classpath:config/local.properties",
+        "classpath:config/tests.properties"
 })
 
 public interface WebDriverConfig extends Config {
 
     @Key("baseUrl")
+    @DefaultValue("https://demoqa.com")
     String getBaseUrl();
 
     @Key("browser")
+    @DefaultValue("chrome")
     String getBrowser();
 
     @Key("browserSize")
+    @DefaultValue("1920x1080")
     String getBrowserSize();
 
     @Key("browserVersion")
+    @DefaultValue("127.0")
     String getBrowserVersion();
 
     @Key("pageLoadStrategy")
+    @DefaultValue("eager")
     String getPageLoadStrategy();
 
     @Key("holdBrowserOpen")
@@ -30,7 +36,19 @@ public interface WebDriverConfig extends Config {
     Boolean getHoldBrowserOpen();
 
     @Key("remoteUrl")
+    @DefaultValue("")
     String getRemoteUrl();
 
+    @Key("remote")
+    @DefaultValue("false")
+    boolean remote();
+
+    @Key("enableVNC")
+    @DefaultValue("false")
+    boolean enableVNC();
+
+    @Key("enableVideo")
+    @DefaultValue("false")
+    boolean enableVideo();
 
 }
