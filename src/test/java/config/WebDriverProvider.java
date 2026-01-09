@@ -29,7 +29,7 @@ public class WebDriverProvider  {
 //                    authConfig.getRemoteUsername() + ":" +
 //                    authConfig.getRemotePassword() + "@" +
 //                    config.getRemoteUrl() + "/wd/hub";
-
+            Configuration.remote = config.getRemoteUrl();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(
                     "enableVNC", config.enableVNC(),
