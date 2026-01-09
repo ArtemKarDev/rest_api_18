@@ -15,7 +15,7 @@ public class WebDriverProvider  {
     public static void config() {
 
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-        SelenoidAuthConfig selenoidAuthConfig = ConfigFactory.create(SelenoidAuthConfig.class, System.getProperties());
+        SelenoidAuthConfig authConfig = ConfigFactory.create(SelenoidAuthConfig.class, System.getProperties());
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browser = config.getBrowser();
@@ -24,9 +24,11 @@ public class WebDriverProvider  {
         Configuration.pageLoadStrategy = config.getPageLoadStrategy();
         Configuration.holdBrowserOpen = config.getHoldBrowserOpen();
 
-        String remoteUrl = System.getProperty("remote");
-        if (remoteUrl != null && !remoteUrl.isEmpty()) {
-            Configuration.remote = remoteUrl;
+        if (config.getRemote()) {
+            String remoteUrl = "https://" +
+                    authConfig.getRemoteUsername() + ":" +
+                    authConfig.getRemotePassword() + "@" +
+                    config.getRemoteUrl() + "/wd/hub";
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(

@@ -4,8 +4,8 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "classpath:config/selenoid.properties",
-        "classpath:config/tests.properties",
+        "classpath:config/${env}.properties",
+        "classpath:config/local.properties",
         "classpath:config/auth.properties"
 })
 
@@ -41,7 +41,11 @@ public interface WebDriverConfig extends Config {
 
     @Key("remote")
     @DefaultValue("false")
-    boolean remote();
+    boolean getRemote();
+
+    @Key("env")
+    @DefaultValue("local")
+    String getEnv();
 
     @Key("enableVNC")
     @DefaultValue("false")
