@@ -26,15 +26,16 @@ public class TestBase {
     @BeforeAll
     static void setUpConfig() {
 
-        WebDriverProvider webDriverProvider = new WebDriverProvider();
-        webDriverProvider.config();
+        //WebDriverProvider webDriverProvider = new WebDriverProvider();
+        WebDriverProvider.config();
 
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
         RestAssured.baseURI = config.getBaseUrl();
 
-        System.out.println("-> Режим: " + (config.remote() ? "Удалённый" : "Локальный"));
-        System.out.println("-> Browser: " + Configuration.browser);
-        System.out.println("-> Base URL: " + Configuration.baseUrl);
+        System.out.println("-> Remote URL: " + System.getProperty("remote", "null"));
+        System.out.println("-> Browser: " + config.getBrowser());
+        System.out.println("-> Size: " + config.getBrowserSize());
+        System.out.println("-> Base URL: " + config.getBaseUrl());
 
     }
 

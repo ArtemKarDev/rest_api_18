@@ -24,12 +24,9 @@ public class WebDriverProvider  {
         Configuration.pageLoadStrategy = config.getPageLoadStrategy();
         Configuration.holdBrowserOpen = config.getHoldBrowserOpen();
 
-        if ("remote".equals(System.getProperty("env"))) {
-            Configuration.remote = "https://"
-                    + selenoidAuthConfig.getRemoteUsername() + ":"
-                    + selenoidAuthConfig.getRemotePassword() + "@"
-                    + config.getRemoteUrl()
-                    + "/wd/hub";
+        String remoteUrl = System.getProperty("remote");
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            Configuration.remote = remoteUrl;
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(
@@ -38,7 +35,11 @@ public class WebDriverProvider  {
             ));
 
         Configuration.browserCapabilities = capabilities;
+            System.out.println("-> Режим: Удалённый запуск через Selenoid: " + remoteUrl);
+        } else {
+            System.out.println("-> Режим: Локальный запуск");
         }
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
     }
