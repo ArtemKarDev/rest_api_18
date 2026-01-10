@@ -26,7 +26,6 @@ public class TestBase {
     @BeforeAll
     static void setUpConfig() {
 
-        //WebDriverProvider webDriverProvider = new WebDriverProvider();
         WebDriverProvider.config();
 
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
