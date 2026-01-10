@@ -24,18 +24,6 @@ public class BooksApi {
                 .spec(statusCodeResponseSpec(201));
     }
 
-    @Step("Delete one specific book from profile")
-    public void deleteOneBook(AuthResponseModel authResponse, DeleteOneBookModel deleteOneBookData) {
-
-        given(requestSpecification)
-                .header("Authorization", "Bearer " + authResponse.getToken())
-                .body(deleteOneBookData)
-                .when()
-                .delete("/BookStore/v1/Book")
-                .then()
-                .spec(statusCodeResponseSpec(204));
-    }
-
     @Step("Delete all books from profile")
     public void deleteAllBooks(AuthResponseModel authResponse) {
 

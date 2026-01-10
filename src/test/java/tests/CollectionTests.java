@@ -27,7 +27,6 @@ public class CollectionTests extends TestBase {
     IsbnModel isbnGitBook = new IsbnModel(isbnGit);
     IsbnModel isbnSpeakJSBook = new IsbnModel(isbnSpeakJS);
     AddBookRequestModel addBookRequestData = new AddBookRequestModel();
-    DeleteOneBookModel deleteOneBookRequestData = new DeleteOneBookModel();
 
     @Test
     @DisplayName("Delete all books from profile with button Delete all")
