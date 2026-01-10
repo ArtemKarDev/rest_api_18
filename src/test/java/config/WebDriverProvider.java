@@ -25,10 +25,6 @@ public class WebDriverProvider  {
         Configuration.holdBrowserOpen = config.getHoldBrowserOpen();
 
         if (config.getRemote()) {
-//            String remoteUrl = "https://" +
-//                    authConfig.getRemoteUsername() + ":" +
-//                    authConfig.getRemotePassword() + "@" +
-//                    config.getRemoteUrl() + "/wd/hub";
             Configuration.remote = config.getRemoteUrl();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(
