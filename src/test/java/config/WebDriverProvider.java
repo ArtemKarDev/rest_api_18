@@ -15,7 +15,7 @@ public class WebDriverProvider  {
     public static void config() {
 
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-        SelenoidAuthConfig authConfig = ConfigFactory.create(SelenoidAuthConfig.class, System.getProperties());
+        SelenoidAuthConfig selenoidAuthConfig = ConfigFactory.create(SelenoidAuthConfig.class, System.getProperties());
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browser = config.getBrowser();
@@ -25,17 +25,23 @@ public class WebDriverProvider  {
         Configuration.holdBrowserOpen = config.getHoldBrowserOpen();
 
         if (config.getRemote()) {
-            Configuration.remote = config.getRemoteUrl();
+            String remoteUrl = "https://" + selenoidAuthConfig.getRemoteUsername() + ":" +
+                    selenoidAuthConfig.getRemotePassword() + "@" +
+                    config.getRemoteUrl() + "/wd/hub";
+            Configuration.remote = remoteUrl;
             DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("browserName", config.getBrowser());
+            capabilities.setCapability("browserVersion", config.getBrowserVersion());
+
             capabilities.setCapability("selenoid:options", Map.of(
                     "enableVNC", config.enableVNC(),
                     "enableVideo", config.enableVideo()
             ));
 
         Configuration.browserCapabilities = capabilities;
-            System.out.println("-> Режим: Удалённый запуск через Selenoid: " + config.getRemoteUrl());
+            System.out.println("-> Remote mode: Selenoid " + remoteUrl);
         } else {
-            System.out.println("-> Режим: Локальный запуск");
+            System.out.println("-> Local mode");
         }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());

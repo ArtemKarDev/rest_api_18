@@ -32,7 +32,6 @@ public class TestBase {
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
         RestAssured.baseURI = config.getBaseUrl();
 
-        System.out.println("-> Remote URL: " + System.getProperty("remote", "null"));
         System.out.println("-> Browser: " + config.getBrowser());
         System.out.println("-> Size: " + config.getBrowserSize());
         System.out.println("-> Base URL: " + config.getBaseUrl());
